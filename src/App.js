@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, incrementByAmount} from "./Store/features/CounterSlice";
 import { emailhandler, passwordhandler} from "./Store/features/Emailfeacture";
+import {apiAsync} from "./Store/features/ApiCall"
 
 
 const App = () => {
@@ -13,6 +14,9 @@ const App = () => {
   const incrementHanadler = () => dispatch(increment())
   const decrementHanadler = () => dispatch(decrement())
   const incrementByAmountHanadler = () => dispatch(incrementByAmount(5))
+  useEffect(() => {
+    dispatch(apiAsync())
+  }, []);
   const [data, setdata] = useState({
     email: "",
     password: "",
@@ -31,6 +35,16 @@ const App = () => {
     })
     dispatch(passwordhandler(e.target.value))
   }
+
+  const {images} = useSelector((state) => (
+    // console.log(state.counter3)
+    state.counter3
+    ))
+
+    console.log(images);
+
+
+    
   return (
 
     <div className="container mt-5 "  >
