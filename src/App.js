@@ -3,17 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, incrementByAmount} from "./Store/features/CounterSlice";
 import { emailhandler, passwordhandler} from "./Store/features/Emailfeacture";
 import {apiAsync} from "./Store/features/ApiCall"
+// import loaderimg from './public/main2.gif'
+
 
 
 const App = () => {
-
   const styles = {
     overflowY: "hidden",
     overflowX: "auto"
   }
 
-
- 
   const count = useSelector((state) => state.counter.value)
   const email = useSelector((state) => state.counter2.value1)
   const password = useSelector((state) => state.counter2.value2)
@@ -46,6 +45,7 @@ const App = () => {
     })
     dispatch(passwordhandler(e.target.value))
   }
+  
 const list =  images.map(img => (
   <div>
     <img className="mx-1" key={img.id} height="300" src={img.download_url} alt="" />
@@ -86,8 +86,8 @@ const list =  images.map(img => (
       <br/>
       </form>
       <hr/> 
-<h1>{email}</h1>
-<h1>{password}</h1>
+<h1 className="w-100" >{email}</h1>
+<h1 className="w-100">{password}</h1>
 <hr/>
 <div className="d-flex " style={styles} >
 {list}
