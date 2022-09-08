@@ -6,10 +6,19 @@ import {apiAsync} from "./Store/features/ApiCall"
 
 
 const App = () => {
+
+  const styles = {
+    overflowY: "hidden",
+    overflowX: "auto"
+  }
+
+
+ 
   const count = useSelector((state) => state.counter.value)
   const email = useSelector((state) => state.counter2.value1)
   const password = useSelector((state) => state.counter2.value2)
   const images = useSelector((state) => state.counter3.value)
+
 
   const dispatch = useDispatch()
 
@@ -38,9 +47,9 @@ const App = () => {
     dispatch(passwordhandler(e.target.value))
   }
 const list =  images.map(img => (
-  <li>
-    <img key={img.id} src={img.url} alt="" />
-  </li>
+  <div>
+    <img className="mx-1" key={img.id} height="300" src={img.download_url} alt="" />
+  </div>
 ))
 
 
@@ -80,8 +89,9 @@ const list =  images.map(img => (
 <h1>{email}</h1>
 <h1>{password}</h1>
 <hr/>
-<hr/>
+<div className="d-flex " style={styles} >
 {list}
+</div>
 <hr/>
     </div>
   )
