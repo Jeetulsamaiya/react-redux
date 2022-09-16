@@ -3,16 +3,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, incrementByAmount} from "./Store/features/CounterSlice";
 import { emailhandler, passwordhandler} from "./Store/features/Emailfeacture";
 import {apiAsync} from "./Store/features/ApiCall"
-// import loaderimg from './public/main2.gif'
+import loaderimg from './Assets/loader.gif'
+
 
 
 
 const App = () => {
+
   const styles = {
     overflowY: "hidden",
     overflowX: "auto"
   }
 
+
+ 
   const count = useSelector((state) => state.counter.value)
   const email = useSelector((state) => state.counter2.value1)
   const password = useSelector((state) => state.counter2.value2)
@@ -45,18 +49,30 @@ const App = () => {
     })
     dispatch(passwordhandler(e.target.value))
   }
-  
-const list =  images.map(img => (
-  <div>
-    <img className="mx-1" key={img.id} height="300" src={img.download_url} alt="" />
-  </div>
-))
+
+
+
+let list = ""
+
+if (images) {
+   list =  images.map(img => (
+    <div>
+      <img className="mx-1" key={img.id} height="300" src={img.download_url} alt="" />
+    </div>
+  ))
+}
 
 
     
   return (
+      <div>
+
+        {images.length === 0 ? <div className="loaderContainer" >
+<img  className="loader" src={loaderimg} alt="" />
+</div>: '' }
 
     <div className="container mt-5 "  >
+
       <button onClick={incrementHanadler} className="btn btn-primary">Increment</button>
       <h1>
         {count}
@@ -89,11 +105,12 @@ const list =  images.map(img => (
 <h1 className="w-100" >{email}</h1>
 <h1 className="w-100">{password}</h1>
 <hr/>
-<div className="d-flex " style={styles} >
+<div  className="d-flex webdisplaynone " style={styles} >
 {list}
 </div>
 <hr/>
     </div>
+      </div>
   )
 }
 
